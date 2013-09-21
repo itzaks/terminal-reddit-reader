@@ -13,18 +13,12 @@ class Visual extends EventEmitter
     fg: "white"
     bg: "blue"
 
-  padding:
-    left: 2
-    right: 2
-    top: 10
-    bottom: 10
-
   items: []
   lines: {}
   selected: 0
 
   constructor: ->
-    @size = x: @width + @padding.left + @padding.right
+    @size = x: @width
     @init = x: @x, y: @y
 
     @charm = createCharm()
@@ -90,7 +84,7 @@ class Visual extends EventEmitter
         @charm.write parts[i] + Array(Math.max(0, @width - parts[i].length)).join(' ')
 
       if i isnt parts.length - 1
-        @x = @init.x + @padding.left
+        @x = @init.x
         @fillLine @y
         @y++
 
@@ -142,7 +136,11 @@ menu = new Visual()
 
 menu.reset()
 menu.createStream().pipe(process.stdout)
-menu.on 'select', (label) -> menu.write('SELECTED: ' + label)
+menu.on 'select', (label) ->
+  menu.y = 0
+  menu.reset()
+  menu.write('SELECTED: ' + label)
+  menu.draw()
 
 menu.write("--- loading stuff ----\n")
 
@@ -156,3 +154,5 @@ reddit.r 'all', (err, data) ->
   for item in json.data.children.slice 0, 15
     menu.add item.data.title.substr(0, 100)
     menu.write('-------------------------\n')
+
+  menu.draw()

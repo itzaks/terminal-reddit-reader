@@ -1,20 +1,13 @@
 {
-    "name": "visual",
+    "name": "reddit-readddr",
     "version": "0.1.0",
     "description": "lol",
-    "main": "index.js",
+    "main": "redditz0r.coffee",
     "dependencies": {
         "resumer": "~0.0.0",
         "charm": "~0.1.2",
         "inherits": "~2.0.0"
     },
-    "scripts": {
-        "test": "tap test/*.js"
-    },
-    "author": {
-        "name": "ZZZ",
-        "email": "mail@substack.net",
-        "url": "http://substack.net"
-    },
+    "author": {"name": "ZZZ"},
     "license": "wtf"
 }
